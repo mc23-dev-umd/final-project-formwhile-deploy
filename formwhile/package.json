@@ -1,0 +1,24 @@
+{
+  "name": "formwhile",
+  "version": "0.0.1",
+  "description": "A creative habit web app.",
+  "keywords": [
+    "art",
+    "lifestyle"
+  ],
+  "license": "ISC",
+  "author": "MBC",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --legacy-watch '*'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}

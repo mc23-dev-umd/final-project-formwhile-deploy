@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Formwhile
+    </title>
+    <link rel="stylesheet" href="./css/main.css"/>
+
+    <script src="js/drawingtool.js" defer></script>
+    <script src="js/zenquotes.js" defer></script>
+
+</head>
+<body>
+
+<div id="f-main">
+
+<div class="f-content-area">
+
+<header class="f-tiny-header">
+    <h1>Formwhile</h1>
+</header>
+
+<div id="f-drawing-tool">
+    <img id="f-tool-interface" src="images/formwhile_interface.png" alt="Drawing app interface graphic"/>
+    <canvas id="f-canvas" width="360" height="360"></canvas>
+    <div id="f-color-tray">
+    </div>
+    <input type="range" step="1" min="2" max="7" id="f-size-range" />
+</div>
+<div style="display:flex; justify-content:space-between;">
+        <button onclick="changePalette()">Change palette</button>
+        <button onclick="clearDrawing()">Start over</button>
+        <button onclick="saveDrawing()">Save to PC</button>
+    </div>
+
+<div id="f-quote-area">
+</div>
+
+<nav id="f-site-nav">
+    <!-- <li><a class="nav-link"
+             href="">
+        Your works 
+    </a></li> -->
+    <li><a class="nav-link"
+        href="/guide">
+        How to use
+    </a></li>
+    <li><a class="nav-link"
+        href="/drawing">
+        Drawing guides
+    </a></li>
+    <li><a class="nav-link"
+        href="/about">
+        About Formwhile 
+    </a></li>
+</nav>
+
+</div>
+
+</div>
+
+<footer class="f-site-license">
+    This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="Creative Commons Symbol" style="max-width: 1em;max-height:1em;">
+    <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="Creative Commons Attribution Symbol" style="max-width: 1em;max-height:1em;">
+    <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="Creative Commons Non-commercial Symbol" style="max-width: 1em;max-height:1em;">
+    <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="Creative Commons Share-alike Symbol" style="max-width: 1em;max-height:1em;">
+</footer>
+
+</body>
+
+</html>

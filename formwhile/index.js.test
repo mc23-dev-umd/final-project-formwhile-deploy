@@ -1,0 +1,53 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const supabaseClient = require('@supabase/supabase-js');
+
+
+const app = express();
+const port = 3000;
+app.use(bodyParser.json());
+
+const supabaseURL = 'https://onggmqbozxlvvmwmwwfa.supabase.co';
+const supabaseKey = 'sb_publishable__jS-xGq-ni2hf0MO3MxDCA_vM2RQjLk';
+const supabase = supabaseClient.createClient(supabaseURL, supabaseKey);
+
+app.get('/test', async (req, res) => {
+    console.log("Attempting test select");
+
+    const { data, error } = await supabase
+        .from('test')
+        .select();
+    
+    if (error) {
+        console.log(`Following error occurred:\n${error}`);
+        res.statusCode = 500;
+        res.send(error);
+    }
+    else {
+        res.json(data);
+    }
+});
+app.post('/test', async (req, res) => {
+    console.log("Attempting test insert");
+    console.log(`POST request: ${JSON.stringify(req.body)}`);
+
+    const load1 = req.body.load1;
+    const load2 = req.body.load2;
+    const { data, error } = await supabase
+        .from('test')
+        .insert({ 'load1': load1, 'load2': load2 })
+        .select();
+
+    if (error) {
+        console.log(`Following error occurred:\n${error}`);
+        res.statusCode = 500;
+        res.send(error);
+    }
+    else {
+        res.json(data);
+    }
+});
+
+app.listen(port, () => { 
+    console.log(`App available on port ${port}`);
+});

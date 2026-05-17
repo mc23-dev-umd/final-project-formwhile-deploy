@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+        .color-button {
+            width: 40pt;
+            height: 20pt;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h1>Canvas Test</h1>
+	<canvas id="canvas" width="360" height="360"></canvas>
+    <br>
+    <p>Size</p>
+    <input type="range" step="1" min="2" max="7" id="size-range" />
+    <p>Color</p>
+    <div id="color-tray">
+        <button colorval="#000000" class="color-button"></button>
+        <button colorval="#FFFFFF" class="color-button"></button>
+        <button colorval="#D60000" class="color-button"></button>
+        <button colorval="#0060D6" class="color-button"></button>
+        <button colorval="#FFCB26" class="color-button"></button>
+    </div>
+
+<script>
+
+const canvas = document.getElementById("canvas");
+const canvasBound = canvas.getBoundingClientRect()
+const ctx = canvas.getContext("2d");
+
+// background
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+const penSizeInput = document.getElementById("size-range");
+penSizeInput.value = 1;
+let penSize = 4;
+let color = '#000000';
+ctx.fillStyle = color;
+
+let isDrawing = false;
+let lastPos = { x: 0, y: 0 };
+
+/**
+ * x & y are screen coords given by e.clientX & e.clientY. They are adjusted
+ * for the canvas.
+*/
+function penDrawRect(x, y) {
+    ctx.fillRect(
+        x - canvasBound.left - penSize / 2, 
+        y - canvasBound.top - penSize / 2,
+        penSize,
+        penSize
+    );
+}
+
+function updatePen() {
+    penSize = penSizeInput.value ** 2;
+}
+
+canvas.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+    lastPos.x = e.clientX;
+    lastPos.y = e.clientY;
+    penDrawRect(e.clientX, e.clientY);
+});
+canvas.addEventListener("mousemove", (e) => {
+    if (isDrawing) {
+        let dx = e.clientX - lastPos.x;
+        let dy = e.clientY - lastPos.y;
+        if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+            let len = Math.sqrt(dx**2 + dy**2);
+            let res = Math.floor(len) * (10 / penSizeInput.value);
+            for (let i = 0; i < res; i++) {
+                penDrawRect(lastPos.x + i * (dx / res), lastPos.y + i * (dy / res));
+            }
+        }
+        else {
+            penDrawRect(e.clientX, e.clientY);
+        }
+        lastPos.x = e.clientX;
+        lastPos.y = e.clientY;
+    }
+});
+canvas.addEventListener("mouseup", () => {
+    isDrawing = false;
+});
+canvas.addEventListener("mouseleave", () => {
+    isDrawing = false;
+});
+
+penSizeInput.addEventListener("change", updatePen);
+const colorButtons = document.getElementById("color-tray").children;
+for (let i = 0; i < colorButtons.length; i++) {
+    colorButtons[i].style.backgroundColor = colorButtons[i].getAttribute("colorval");
+    colorButtons[i].addEventListener("click", () => {
+        ctx.fillStyle = colorButtons[i].getAttribute("colorval");
+    });
+}
+
+</script>
+
+</body>
+</html>

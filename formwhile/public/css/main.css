@@ -1,0 +1,177 @@
+@font-face {
+    font-family: "ChivoMono";
+    src: url("../fonts/ChivoMono-Regular.ttf");
+}
+
+/*
+    Page structure
+*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "ChivoMono";
+    font-size: smaller;
+    color: white;
+    background-image: url("../images/sukaiturii-to-tokyo-no-yakei.jpg");
+    background-size: cover;
+
+    transition: all 0.5ms ease-in-out;
+}
+
+#f-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.f-content-area {
+    height: 100vh;
+    width: 540px;
+    min-width: 20%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-image: linear-gradient(#000000, #4e4e4e);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.6);
+}
+
+/*
+    Drawing tool
+*/
+#f-drawing-tool {
+    margin: 0;
+    height: 400pt;
+    position: relative;
+}
+#f-tool-interface {
+    width: 540px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#f-canvas {
+    width: 360px;
+    height: 360px;
+    position: absolute;
+    top: 44.5pt;
+    left: 65pt;
+    background-color: wheat;
+}
+#f-size-range {
+    height: 30pt;
+    width: 92pt;
+    z-index: 5;
+    rotate: -90deg;
+    position: absolute;
+    top: 320pt;
+    left: 322.5pt;
+}
+#f-color-tray {
+    height: 30pt;
+    width: 100pt;
+    z-index: 5;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 336pt;
+    left: 35pt;
+}
+.color-button {
+    margin: 2pt 2pt;
+    width: 24pt;
+    height: 24pt;
+    border-radius: 40%;
+    rotate: 90deg;
+}
+
+/*
+    Page elements
+*/
+.f-content-area > * {
+    margin: 28pt;
+}
+
+nav li {
+    margin: 10pt 0;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+a:hover {
+    text-shadow: 0px 0px 8px white;
+}
+
+.f-home-link {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top:0;
+    font-size: larger;
+    text-align: center;
+}
+
+.f-toc-nav {
+    padding: 10pt 20pt;
+    background-color: black;
+}
+
+#f-drawing-tool {
+    display: flex;
+    justify-content: center;
+}
+
+.f-tiny-header {
+    margin-top: 4pt;
+}
+.f-tiny-header h1 {
+    font-size: smaller;
+    color: #4e4e4e;
+}
+
+footer.f-site-license {
+    display: flex;
+    align-content: center;
+    position: absolute;
+    bottom: 0;
+    right:0;
+    padding: 4pt;
+    font-size: small;
+    background-color: black;
+}
+footer.f-site-license img {
+    margin: 2pt;
+}
+footer.f-site-license a {
+    margin: 0 4pt;
+}
+
+/*
+    Popup
+*/
+.f-popup-overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    backdrop-filter: blur(8px);
+    z-index: 9;
+}
+.f-warning-popup {
+    width: 30%;
+    height: 28%;
+    position: fixed;
+    left: 32.5%;
+    top: 30%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #4e4e4e;
+    z-index: 10;
+    text-align: center;
+}

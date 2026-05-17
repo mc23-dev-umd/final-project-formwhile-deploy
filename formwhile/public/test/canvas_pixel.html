@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>
+    <style>
+
+    </style>
+
+</head>
+<body>
+
+    <h1>Canvas Test</h1>
+	<canvas id="canvas" width="1280" height="720"></canvas>
+    <input type="range" value="2" step="4" min="2" max="14" id="size-range" />
+
+<script>
+
+let grid = [];
+let cellSize = 0;
+const gridSize = 200;
+
+const viewSize = 480;
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let hoverCell = null;
+
+let color = '#000000';
+let tipSize = 1;
+
+let isDrawing = false;
+
+function invertHexcode(hex) {
+    hex = hex.slice(1);
+    return '#' + (Number(`0x1${hex}`) ^ 0xFFFFFF).toString(16).slice(1).toUpperCase()
+}
+
+function hoverRadius() {
+    let coords = [];
+    for (let x = tipSize * -1; x < tipSize + 1; x++) {
+        for (let y = tipSize * -1; y < tipSize + 1; y++) {
+            if (x ** 2 + y ** 2 < tipSize ** 2) {
+                coords.push({
+                    row: x + hoverCell.row,
+                    col: y + hoverCell.col 
+                });
+            }
+        }
+    }
+    return coords;
+}
+
+function render() {
+    let hoverRadiusCells = hoverCell ? hoverRadius() : [];
+    for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+            if (!hoverCell || !hoverRadiusCells.some(c => c.row === row && c.col === col)) {
+                ctx.fillStyle = grid[row][col];
+                ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+            }
+            else {
+                ctx.fillStyle = invertHexcode(grid[row][col]);
+                ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+            }
+        }
+    }
+}
+
+function getCellFromMouse(e) {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const col = Math.floor(x / cellSize);
+    const row = Math.floor(y / cellSize);
+    if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
+        return { row, col };
+    }
+    return null;
+}
+
+function paintCell(row, col) {
+    hoverRadius().forEach(coord => {
+        if (coord.row < gridSize && coord.col < gridSize) {
+            grid[coord.row][coord.col] = color;
+        }
+    });
+    render();
+}
+
+function init() {
+    grid = Array.from({ length: gridSize }, () =>
+        Array(gridSize).fill('#DDDDDD')
+    );
+    cellSize = Math.floor(viewSize / gridSize);
+    canvas.width = gridSize * cellSize;
+    canvas.height = gridSize * cellSize;
+    render();
+
+    canvas.addEventListener("mousedown", (e) => {
+        isDrawing = true;
+        const cell = getCellFromMouse(e);
+        if (cell) {
+            paintCell(cell.row, cell.col);
+        }
+    });
+    canvas.addEventListener("mousemove", (e) => {
+        const cell = getCellFromMouse(e);
+        hoverCell = cell;
+        if (isDrawing && cell) {
+            paintCell(cell.row, cell.col);
+        }
+        else {
+            render();
+        }
+    });
+    canvas.addEventListener("mouseup", () => {
+        isDrawing = false;
+    });
+    canvas.addEventListener("mouseleave", () => {
+        isDrawing = false;
+        hoverCell = null;
+        render();
+    });
+
+    let sizeInput = document.getElementById("size-range");
+    sizeInput.addEventListener('input', () => {
+        console.log("size update")
+        tipSize = sizeInput.value;
+    });
+}
+
+init();
+
+</script>
+
+</body>
+</html>
