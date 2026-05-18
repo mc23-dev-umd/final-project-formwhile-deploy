@@ -183,10 +183,11 @@ footer.f-site-license a {
     border-radius: 30px;
 }
 .f-popup-button {
-    width: 50%;
+    padding: 4pt;
     margin: 10pt 10pt;
-    background-color: #000000;
     color: white;
+    background-image: linear-gradient(#000000, #4e4e4e);
+    box-shadow: 0 0 8px black;
 }
 #f-popup-confirm:hover {
     background-color: darkgreen;
