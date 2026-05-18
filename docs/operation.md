@@ -17,3 +17,14 @@ Run the following locally to update all packages to max latest version:
 ```npm update --include=dev```
 
 Commit this change to Github.
+
+## Roadmap
+Google OAuth2 for login so that users may store their creations remotely is high-priority. 
+
+Feature ideas:
+- Undo on canvas
+- Change brush shape
+- Add texture to brush (aliasing, noise, random deviations)
+- Remotely store user drawings (at least temporarily)
+- Issue email reminders for inactivity
+- User account configuration (notifications, data management) 
