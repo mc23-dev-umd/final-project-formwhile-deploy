@@ -79,7 +79,7 @@ app.get('/data/api/zenquote', async (req, res) => {
             res.send(error);
         }
         else {
-            res.send(data);
+            res.send(data[data.length - 1]);
         }
         return;
     }

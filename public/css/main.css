@@ -149,6 +149,12 @@ footer.f-site-license a {
     margin: 0 4pt;
 }
 
+.f-meta-button {
+    padding: 4pt;
+    background-image: linear-gradient(#000000, #4e4e4e);
+    box-shadow: 0 0 8px black;
+}
+
 /*
     Popup
 */
@@ -174,4 +180,17 @@ footer.f-site-license a {
     background-color: #4e4e4e;
     z-index: 10;
     text-align: center;
+    border-radius: 30px;
+}
+.f-popup-button {
+    width: 50%;
+    margin: 10pt 10pt;
+    background-color: #000000;
+    color: white;
+}
+#f-popup-confirm:hover {
+    background-color: darkgreen;
+}
+#f-popup-cancel:hover {
+    background-color: maroon;
 }

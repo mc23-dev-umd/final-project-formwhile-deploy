@@ -64,8 +64,8 @@ function warningPopup() {
     popup.setAttribute("class", "f-warning-popup");
     popup.innerHTML = "<h3>WARNING</h3><p>This action will reset your canvas, " +
         "erasing all current progress. Are you sure you want to proceed?</p><br>" +
-        "<button id=\"f-popup-confirm\">Proceed</button>" +
-        "<button id=\"f-popup-cancel\">Cancel</button>";
+        "<button class=\"f-popup-button\" id=\"f-popup-confirm\">Proceed</button>" +
+        "<button class=\"f-popup-button\" id=\"f-popup-cancel\">Cancel</button>";
     document.body.appendChild(popup);
     let confButton = document.getElementById("f-popup-confirm");
     let cancelButton = document.getElementById("f-popup-cancel");
